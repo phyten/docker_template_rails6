@@ -14,6 +14,8 @@ COPY --from=node /usr/local/ /usr/local/
 COPY --from=node /opt/ /opt/
 
 COPY package.json yarn.lock ./
+RUN yarn install --check-files
+RUN yarn install
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
