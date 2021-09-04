@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Abstraction
+This repo is docker template for construction of rails6.
 
-Things you may want to cover:
+## Usage
 
-* Ruby version
+### git clone
 
-* System dependencies
+```
+git clone [this repo]
+```
 
-* Configuration
+### .env
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+cp .sample.env .env
+```
