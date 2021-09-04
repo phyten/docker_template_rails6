@@ -13,27 +13,56 @@ services:
 
   app:
     image: phyten/template_rails6:alpine-3.0.2-6.1.4.1
-    # プロセスが正しく後始末される
-    # init: true
     stdin_open: true
     tty: true
+    environment:
+      RAILS_MASTER_KEY: $RAILS_MASTER_KEY
+      DISABLE_SPRING: "1"
+      RAILS_SERVE_STATIC_FILES: "1"
+      WEBPACKER_DEV_SERVER_PORT: "2849"
+      WEBPACKER_DEV_SERVER_PUBLIC: "localhost:2849"
     ports:
       - "13000:3000"
     volumes:
       - .:/myapp
       - /myapp/node_modules
+      - app_tmp:/myapp/tmp
+      - app_log:/myapp/log
+      - packs:/myapp/public/packs
+      - packs-test:/myapp/public/packs-test
+      - assets:/myapp/public/assets
     command: /bin/sh -c "rm -f tmp/pids/server.pid && rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - db
       - webpacker
+
   webpacker:
     image: phyten/template_rails6:alpine-3.0.2-6.1.4.1
     stdin_open: true
     tty: true
+    environment:
+      RAILS_MASTER_KEY: $RAILS_MASTER_KEY
+      DISABLE_SPRING: "1"
+      RAILS_SERVE_STATIC_FILES: "1"
+      WEBPACKER_DEV_SERVER_PORT: "2849"
+      WEBPACKER_DEV_SERVER_PUBLIC: "localhost:2849"
+      WEBPACKER_DEV_SERVER_HOST: "0.0.0.0"
     volumes:
       - .:/myapp
       - /myapp/node_modules
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bin/webpack-dev-server"
+      - app_tmp:/myapp/tmp
+      - app_log:/myapp/log
+      - packs:/myapp/public/packs
+      - packs-test:/myapp/public/packs-test
+      - assets:/myapp/public/assets
+    command: /bin/sh -c "bin/webpack-dev-server"
+    ports:
+      - "2849:2849"
 
 volumes:
   db_data:
+  app_tmp:
+  app_log:
+  packs:
+  packs-test:
+  assets:
