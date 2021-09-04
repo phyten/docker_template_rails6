@@ -20,3 +20,5 @@ RUN yarn install
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+
+COPY . /myapp
