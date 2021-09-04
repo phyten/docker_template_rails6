@@ -7,3 +7,4 @@ config/master.key
 docker-compose.*
 Dockerfile
 .dockerignore
+README.md
