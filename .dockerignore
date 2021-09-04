@@ -1,3 +1,9 @@
-/log
-/tmp
-/config/master.key
+log
+tmp
+config/master.key
+.git
+.gitignore
+.env
+docker-compose.*
+Dockerfile
+.dockerignore
